@@ -1,0 +1,104 @@
+.job-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 25px;
+  border-radius: 12px;
+  background-color: #ffffff;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  max-width: 350px;
+  margin: 20px auto;
+  text-align: center;
+  border: 1px solid #e0e0e0;
+  height: 350px;
+}
+
+.job-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.job-card .MuiCardContent-root {
+  padding: 20px;
+}
+
+.job-card h5 {
+  color: #1976d2;
+  font-weight: bold;
+  font-size: 1.25rem;
+  margin-bottom: 15px;
+}
+
+.job-card .MuiTypography-h6 {
+  font-size: 1.1rem;
+  color: #424242;
+  font-weight: 500;
+  margin-bottom: 15px;
+}
+
+.job-card .MuiTypography-body2 {
+  font-size: 1rem;
+  color: #555555;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.job-card .salary {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #2e7d32;
+  margin-bottom: 20px;
+}
+
+.job-card .MuiTypography-caption {
+  font-size: 0.875rem;
+  color: #777777;
+  margin-bottom: 20px;
+}
+
+.job-card .MuiButton-root {
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 12px 30px;
+  background-color: #1976d2;
+  color: white;
+  text-transform: none;
+  border-radius: 25px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.job-card .MuiButton-root:hover {
+  background-color: #1565c0; 
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 600px) {
+  .job-card {
+    max-width: 100%;
+    padding: 20px;
+  }
+
+  .job-card h5 {
+    font-size: 1.1rem;
+  }
+
+  .job-card .MuiTypography-h6 {
+    font-size: 1rem;
+  }
+
+  .job-card .MuiTypography-body2 {
+    font-size: 0.95rem;
+  }
+
+  .job-card .salary {
+    font-size: 1rem;
+  }
+
+  .job-card .MuiButton-root {
+    font-size: 0.95rem;
+    padding: 10px 20px;
+  }
+}
