@@ -1,113 +1,22 @@
-// import React, { useEffect, useState } from 'react';
-// import { useNavigate } from "react-router-dom";
-// // import JobCard from '../components/Card/jobCard';
-// import SubscriptionCard from '../components/Card/subscriptionCard';
-// import Navbar from "../components/Navbar/Navbar";
-// import Footer from "../components/Footer/Footer";
-// import { Container, Grid, Typography, CircularProgress, Box } from '@mui/material';
-// import { useSelector } from "react-redux";
-
-// const JobListings = () => {
-//   const navigate = useNavigate();  
-//   const user = useSelector((state) => state.auth.user);
-//   const role = useSelector((state) => state.auth.role);
-
-//   useEffect(() => {
-//     if (!user) {
-//       navigate("/login");
-//     } else if (role !== "employee") {
-//       navigate("/admin-dashboard");
-//     }
-//   }, [user, role, navigate]);
-
-//   const [jobs, setJobs] = useState([]);
-//   const [loading, setLoading] = useState(true);
-
-//   useEffect(() => {
-//     const fetchJobs = async () => {
-//       try {
-//         const response = await fetch("http://127.0.0.1:5001/api/v1/plans");
-//         const data = await response.json();
-//         setJobs(data);
-//         setLoading(false);
-//       } catch (error) {
-//         console.error('Error fetching jobs:', error);
-//         setLoading(false);
-//       }
-//     };
-
-//     fetchJobs();
-//   }, []);
-
-//   // Loading spinner while fetching data
-//   if (loading) {
-//     return (
-//       <div>
-//         <Navbar />
-//         <Box
-//           sx={{
-//             display: 'flex',
-//             justifyContent: 'center',
-//             alignItems: 'center',
-//             height: '70vh',
-//           }}
-//         >
-//           <CircularProgress />
-//         </Box>
-//         <Footer />
-//       </div>
-//     );
-//   }
-
-//   return (
-//     <div>
-//       <Navbar />
-//       <Container maxWidth="lg" sx={{ mt: 4 }}>
-//         <Typography variant="h3" gutterBottom textAlign="center">
-//           Job Listings
-//         </Typography>
-//         <Grid container spacing={4}>
-//           {jobs.map((job) => (
-//             <Grid item xs={12} sm={6} md={4} key={job._id}>
-//               <JobCard 
-//                 title={job.jobTitle} 
-//                 companyName={job.companyName} 
-//                 description={job.description} 
-//                 salary={job.salary} 
-//                 applyLink={job.jobLink || "https://info.cern.ch/hypertext/WWW/TheProject.html"}
-//                 lastUpdated={new Date(job.updatedAt).toLocaleDateString()}
-//               />
-//             </Grid>
-//           ))}
-//         </Grid>
-//       </Container>
-//       <Footer />
-//     </div>
-//   );
-// };
-
-// export default JobListings;
-
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import SubscriptionCard from "../components/Card/subscriptionCard";
 import Navbar from "../components/Navbar/Navbar";
 import Footer from "../components/Footer/Footer";
 import { Container, Grid, Typography, CircularProgress, Box } from "@mui/material";
-import { useSelector } from "react-redux";
+
+// List of features included in all plans
+const allPlanFeatures = [
+  "Access to 100+ French lessons",
+  "Interactive quizzes and exercises",
+  "Audio pronunciation guides",
+  "Personalized progress tracking",
+  "Grammar-focused modules",
+  "Weekly progress reports",
+];
 
 const SubscriptionPlans = () => {
   const navigate = useNavigate();
-  const user = useSelector((state) => state.auth.user);
-  const role = useSelector((state) => state.auth.role);
-
-  useEffect(() => {
-    if (!user) {
-      navigate("/login");
-    } else if (role !== "employee") {
-      navigate("/admin-dashboard");
-    }
-  }, [user, role, navigate]);
 
   const [plans, setPlans] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -116,23 +25,7 @@ const SubscriptionPlans = () => {
     const fetchPlans = async () => {
       try {
         const response = await fetch("http://127.0.0.1:5001/api/v1/plans");
-        // const data = await response.json();
-        const data = 
-        [
-            {
-                "_id": "67528880e3908f92815436ca",
-                "planName": "Basic",
-                "price": 19.99,
-                "duration": 30,
-                "features": [
-                    "Feature 1",
-                    "Feature 2"
-                ],
-                "createdAt": "2024-12-06T05:15:44.568Z",
-                "updatedAt": "2024-12-06T05:15:59.796Z",
-                "__v": 0
-            }
-        ]
+        const data = await response.json();
         setPlans(data);
         setLoading(false);
       } catch (error) {
@@ -144,7 +37,6 @@ const SubscriptionPlans = () => {
     fetchPlans();
   }, []);
 
-  // Loading spinner while fetching data
   if (loading) {
     return (
       <div>
@@ -165,12 +57,36 @@ const SubscriptionPlans = () => {
   }
 
   return (
-    <div>
+    <Box
+      sx={{
+        backgroundColor: "#eaf4fc", // Light pastel blue background
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
       <Navbar />
       <Container maxWidth="lg" sx={{ mt: 4 }}>
-        <Typography variant="h3" gutterBottom textAlign="center">
-          Subscription Plans
+        {/* Header Section */}
+        <Typography
+          variant="h3"
+          gutterBottom
+          textAlign="center"
+          sx={{ color: "#333", fontWeight: "bold" }}
+        >
+          Subscription Plans for Learning French
         </Typography>
+        <Typography
+          variant="body1"
+          color="textSecondary"
+          textAlign="center"
+          gutterBottom
+        >
+          Choose a plan that suits your goals and start mastering the French
+          language today!
+        </Typography>
+
+        {/* Subscription Plans */}
         <Grid container spacing={4}>
           {plans.map((plan) => (
             <Grid item xs={12} sm={6} md={4} key={plan._id}>
@@ -179,16 +95,66 @@ const SubscriptionPlans = () => {
                 price={plan.price}
                 duration={plan.duration}
                 features={plan.features}
-                updatedAt={plan.updatedAt}
+                updatedAt={new Date(plan.updatedAt).toLocaleDateString()}
               />
             </Grid>
           ))}
         </Grid>
+
+        {/* All Plans Include Section */}
+        <Box
+          sx={{
+            mt: 6,
+            p: 4,
+            backgroundColor: "#ffffff", // White background for the section
+            borderRadius: "12px",
+            textAlign: "center",
+            boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.1)",
+          }}
+        >
+          <Typography variant="h5" fontWeight="bold" gutterBottom>
+            All subscription plans include
+          </Typography>
+          <Typography
+            variant="body1"
+            color="textSecondary"
+            gutterBottom
+          >
+            Unlock everything you need to master French, no matter your level of
+            proficiency!
+          </Typography>
+          <Grid container spacing={2} justifyContent="center">
+            {allPlanFeatures.map((feature, index) => (
+              <Grid item xs={12} sm={6} md={4} key={index}>
+                <Typography
+                  variant="body1"
+                  sx={{
+                    fontSize: "1rem",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <span
+                    style={{
+                      display: "inline-block",
+                      width: "8px",
+                      height: "8px",
+                      backgroundColor: "#1976d2",
+                      borderRadius: "50%",
+                      marginRight: "10px",
+                    }}
+                  ></span>
+                  {feature}
+                </Typography>
+              </Grid>
+            ))}
+          </Grid>
+        </Box>
       </Container>
       <Footer />
-    </div>
+    </Box>
   );
 };
 
 export default SubscriptionPlans;
-

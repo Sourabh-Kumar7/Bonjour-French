@@ -1,79 +1,36 @@
-// import React from 'react';
-// // import { Card, CardContent, Typography, Button, CardActions } from '@mui/material';
-// import { Card, CardContent, CardActions, Typography, Button, List, ListItem } from "@mui/material";
-// import './subscriptionCard.css';
-
-// const SubscriptionCard = ({ planName, price, duration, features, updatedAt }) => {
-//   return (
-//     <Card className="subscription-card" variant="outlined" sx={{ maxWidth: 345, margin: "1rem" }}>
-//       <CardContent>
-//         <Typography variant="h5" component="h2" gutterBottom>
-//           {planName} Plan
-//         </Typography>
-//         <Typography variant="h6" color="textPrimary" gutterBottom>
-//           ${price.toFixed(2)} / {duration} days
-//         </Typography>
-//         <Typography variant="body1" gutterBottom>
-//           Features:
-//         </Typography>
-//         <List>
-//           {features.map((feature, index) => (
-//             <ListItem key={index} sx={{ padding: 0 }}>
-//               - {feature}
-//             </ListItem>
-//           ))}
-//         </List>
-//         <Typography variant="caption" display="block" color="textSecondary" sx={{ mt: 2 }}>
-//           Last Updated: {new Date(updatedAt).toLocaleDateString()}
-//         </Typography>
-//       </CardContent>
-//       <CardActions>
-//         <Button size="small" variant="contained" color="primary">
-//           Subscribe Now
-//         </Button>
-//       </CardActions>
-//     </Card>
-//   );
-// };
-
-// export default SubscriptionCard;
-
 import React from "react";
-import { Card, CardContent, Typography, Button, CardActions } from "@mui/material";
+import { Card, CardContent, Typography, Button } from "@mui/material";
 import "./subscriptionCard.css";
 
 const SubscriptionCard = ({ planName, price, duration, features, updatedAt }) => {
+  const formattedPrice = !isNaN(price) ? Number(price).toFixed(2) : "N/A";
+
   return (
-    <Card className="subscription-card" variant="outlined">
+    <Card className="subscription-card">
       <CardContent>
-        <Typography className="plan-title" variant="h5" component="h2" gutterBottom>
-          {planName} Plan
+        <Typography variant="h5" component="h2" className="plan-name">
+          {planName}
         </Typography>
-        <Typography className="plan-price" variant="h6" color="textPrimary" gutterBottom>
-          ${price.toFixed(2)} / {duration} days
+        <Typography variant="h6" component="p" className="plan-price">
+          ${formattedPrice} / {duration}
         </Typography>
-        <Typography className="plan-features-header" variant="body1" gutterBottom>
+        <Typography variant="subtitle1" component="p" className="plan-features-header">
           Features:
         </Typography>
-        <ul className="plan-features">
+        <ul className="plan-features-list">
           {features.map((feature, index) => (
-            <li key={index}>{feature}</li>
+            <li key={index} className="plan-feature-item">
+              {feature}
+            </li>
           ))}
         </ul>
-        <Typography className="updated-at" variant="caption" display="block" color="textSecondary">
-          Last Updated: {new Date(updatedAt).toLocaleDateString()}
+        <Typography variant="caption" display="block" color="textSecondary" gutterBottom>
+          Last Updated: {updatedAt}
         </Typography>
-      </CardContent>
-      <CardActions>
-        <Button
-          className="subscribe-button"
-          size="small"
-          variant="contained"
-          color="primary"
-        >
+        <Button variant="contained" color="primary" className="subscribe-button">
           Subscribe Now
         </Button>
-      </CardActions>
+      </CardContent>
     </Card>
   );
 };

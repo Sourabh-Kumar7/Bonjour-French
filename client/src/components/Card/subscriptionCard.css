@@ -1,107 +1,103 @@
-/* Card Styling */
-.subscription-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px;
-    border-radius: 12px;
-    background: linear-gradient(135deg, #f9fbff, #e3f2fd);
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    max-width: 350px;
-    margin: 20px auto;
+
+/* Page Background */
+body {
+    background: linear-gradient(135deg, #f5f9ff, #ffffff);
+    margin: 0;
+    font-family: "Arial", sans-serif;
+  }
+  
+  /* Header */
+  .plans-header {
+    font-size: 2.5rem;
+    font-weight: bold;
     text-align: center;
-    border: none;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    margin-bottom: 1rem;
+    color: #333;
+  }
+  
+  /* Toggle Section */
+  .billing-toggle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  
+  .billing-toggle .MuiTypography-root {
+    font-size: 1rem;
+    margin: 0 10px;
+  }
+  
+  /* Card Styling */
+  .subscription-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
   }
   
   .subscription-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
   }
   
-  /* Title and Price Styling */
-  .plan-title {
+  /* Plan Name */
+  .subscription-card .plan-name {
     font-size: 1.5rem;
     font-weight: bold;
-    color: #333;
-    margin-bottom: 10px;
+    color: #1976d2;
+    margin-bottom: 0.5rem;
   }
   
-  .plan-price {
+  /* Plan Price */
+  .subscription-card .plan-price {
     font-size: 1.25rem;
-    font-weight: 600;
-    color: #1c7dfa;
-    margin-bottom: 15px;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: #2e7d32;
   }
   
-  /* Features List */
-  .plan-features-header {
+  /* Plan Features */
+  .subscription-card .plan-features-header {
     font-size: 1rem;
-    font-weight: 500;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
     color: #555;
-    margin-bottom: 10px;
   }
   
-  .plan-features {
+  .subscription-card .plan-features-list {
     list-style: none;
     padding: 0;
-    margin: 0 0 15px 0;
+    margin: 0 0 1rem;
   }
   
-  .plan-features li {
-    font-size: 0.9rem;
+  .subscription-card .plan-feature-item {
+    font-size: 0.95rem;
     color: #555;
-    line-height: 1.6;
+    margin-bottom: 0.5rem;
   }
   
-  /* Updated Date */
-  .updated-at {
+  /* Updated At */
+  .subscription-card .plan-updated {
     font-size: 0.8rem;
-    color: #888;
-    margin-bottom: 20px;
+    color: #777;
+    margin-bottom: 1rem;
   }
   
   /* Button Styling */
-  .subscribe-button {
+  .subscription-card .subscribe-button {
+    background-color: #1976d2;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
     font-size: 1rem;
     font-weight: bold;
-    padding: 10px 20px;
-    border-radius: 25px;
-    background: linear-gradient(90deg, #4c5cfa, #1c7dfa);
-    color: white;
     text-transform: none;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   }
   
-  .subscribe-button:hover {
-    background: linear-gradient(90deg, #1c7dfa, #4c5cfa);
-    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
-  }
-  
-  /* Responsive Design */
-  @media (max-width: 600px) {
-    .subscription-card {
-      max-width: 100%;
-      padding: 20px;
-    }
-  
-    .plan-title {
-      font-size: 1.25rem;
-    }
-  
-    .plan-price {
-      font-size: 1.1rem;
-    }
-  
-    .plan-features li {
-      font-size: 0.85rem;
-    }
-  
-    .subscribe-button {
-      font-size: 0.9rem;
-      padding: 8px 16px;
-    }
+  .subscription-card .subscribe-button:hover {
+    background-color: #1565c0;
   }
   
