@@ -18,8 +18,8 @@ const UserInfo = () => {
       navigate("/login"); // If not logged in, redirect to login
     } else {
       const { role } = JSON.parse(storedUser);
-      if (role !== "employee") {
-        navigate("/admin-dashboard"); // If the role is not employee, redirect to admin dashboard
+      if (role !== "admin") {
+        navigate("/home"); // If the role is not employee, redirect to admin dashboard
       }
     }
 

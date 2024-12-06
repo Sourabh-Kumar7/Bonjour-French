@@ -10,7 +10,6 @@ import {
 } from "@mui/material";
 import { FaVolumeUp, FaCopy } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 import Navbar from "../components/Navbar/Navbar";
 import Footer from "../components/Footer/Footer";
 
@@ -20,7 +19,6 @@ const EnglishToFrenchTranslator = () => {
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
-  const [user, setUser] = useState(null); // State to hold the parsed user object
 
   useEffect(() => {
     // Check if the user is logged in
