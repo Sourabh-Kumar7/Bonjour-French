@@ -14,6 +14,8 @@ const userSubscriptionRoutes = require('./routes/userSubscriptionRoutes');
 
 const port = process.env.PORT;
 const mongoURI = process.env.MONGODB_URI;
+const ui_base_url = process.env.UI_BASE_URL;
+
 
 connectDB(mongoURI);
 
@@ -21,7 +23,7 @@ const app = express();
 
 const cors = require("cors");
 
-app.use(cors({ origin: 'http://localhost:3000' }));
+app.use(cors({ origin: `${ui_base_url}` }));
 
 
 // Middleware
