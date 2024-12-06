@@ -1,0 +1,103 @@
+
+/* Page Background */
+body {
+    background: linear-gradient(135deg, #f5f9ff, #ffffff);
+    margin: 0;
+    font-family: "Arial", sans-serif;
+  }
+  
+  /* Header */
+  .plans-header {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #333;
+  }
+  
+  /* Toggle Section */
+  .billing-toggle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  
+  .billing-toggle .MuiTypography-root {
+    font-size: 1rem;
+    margin: 0 10px;
+  }
+  
+  /* Card Styling */
+  .subscription-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+  }
+  
+  .subscription-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Plan Name */
+  .subscription-card .plan-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #1976d2;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Plan Price */
+  .subscription-card .plan-price {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: #2e7d32;
+  }
+  
+  /* Plan Features */
+  .subscription-card .plan-features-header {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #555;
+  }
+  
+  .subscription-card .plan-features-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1rem;
+  }
+  
+  .subscription-card .plan-feature-item {
+    font-size: 0.95rem;
+    color: #555;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Updated At */
+  .subscription-card .plan-updated {
+    font-size: 0.8rem;
+    color: #777;
+    margin-bottom: 1rem;
+  }
+  
+  /* Button Styling */
+  .subscription-card .subscribe-button {
+    background-color: #1976d2;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: none;
+  }
+  
+  .subscription-card .subscribe-button:hover {
+    background-color: #1565c0;
+  }
+  
