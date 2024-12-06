@@ -8,6 +8,7 @@ import Contact from "./pages/Contact";
 import CompanyShowcase from "./pages/CompanyShowcase";
 import AdminDashboard from "./pages/AdminDashboard";
 import AddJob from "./pages/AddJob";
+import Home from "./pages/Home";
 
 
 
@@ -16,6 +17,7 @@ function App() {
   return (
     <Router>
       <Routes>
+      <Route path="/" element={<Home />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/joblistings" element={<JobListings />} />
