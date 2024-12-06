@@ -10,6 +10,7 @@ import SignUpPage from "./pages/SignUpPage";
 import EnglishToFrenchTranslator from "./pages/Demo";
 import UserInfo from "./pages/UserInfo";
 import CreateSubscriptionPlan from "./pages/CreatePlan";
+import Home from "./pages/Home";
 
 
 
@@ -18,7 +19,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<Home/>} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/sign-up" element={<SignUpPage />} />
