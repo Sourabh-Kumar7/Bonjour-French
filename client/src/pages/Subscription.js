@@ -5,6 +5,9 @@ import Navbar from "../components/Navbar/Navbar";
 import Footer from "../components/Footer/Footer";
 import { Container, Grid, Typography, CircularProgress, Box } from "@mui/material";
 
+require('dotenv').config();
+const base_url = process.env.base_url;
+
 // List of features included in all plans
 const allPlanFeatures = [
   "Access to 100+ French lessons",
@@ -36,7 +39,7 @@ const SubscriptionPlans = () => {
 
     const fetchPlans = async () => {
       try {
-        const response = await fetch("http://127.0.0.1:5001/api/v1/plans");
+        const response = await fetch(`${base_url}/api/v1/plans`);
         const data = await response.json();
         setPlans(data);
         setLoading(false);

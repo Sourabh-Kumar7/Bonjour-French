@@ -4,6 +4,10 @@ import { useNavigate } from "react-router-dom";
 import AdminNavbar from "../components/Navbar/AdminNavbar";
 import Footer from "../components/Footer/Footer";
 
+
+require('dotenv').config();
+const base_url = process.env.base_url;
+
 const CreateSubscriptionPlan = () => {
   const navigate = useNavigate();
 
@@ -60,7 +64,7 @@ const CreateSubscriptionPlan = () => {
     setLoading(true);
 
     try {
-      const response = await fetch("http://127.0.0.1:5001/api/v1/plans", {
+      const response = await fetch(`${base_url}/api/v1/plans`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

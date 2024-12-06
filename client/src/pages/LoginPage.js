@@ -6,6 +6,9 @@ import { useDispatch } from "react-redux";
 import { loginSuccess } from "../redux/authSlice";
 import Footer from "../components/Footer/Footer";
 
+require('dotenv').config();
+const base_url = process.env.base_url;
+
 const LoginPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -31,7 +34,7 @@ const LoginPage = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5001/api/v1/auth/login", credentials);
+      const response = await axios.post(`${base_url}/api/v1/auth/login`, credentials);
 
       if (response.data.message === "Login successful") {
         const { name, email, type } = response.data.user;
