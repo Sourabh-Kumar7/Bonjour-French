@@ -15,7 +15,6 @@ const Footer = () => {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        // minHeight: "100vh", // To ensure it takes full height for vertical centering
       }}
     >
       <div className="container">
@@ -24,40 +23,16 @@ const Footer = () => {
           spacing={4}
           justifyContent="center"
           alignItems="center"
-          sx={{ paddingBottom: 4 }}
+          sx={{ paddingBottom: 0 }}
         >
           {/* Column 1: Title */}
           <Grid item xs={12} md={3}>
-            <Typography variant="h5" sx={{ paddingTop: 5 }}>
+            <Typography variant="h5" sx={{ paddingTop: 0 }}>
               Bonjour French
             </Typography>
           </Grid>
 
-          {/* Column 2: About Us */}
-          <Grid item xs={12} md={3}>
-            <Typography variant="h6">About Us</Typography>
-            <Typography variant="body2" sx={{ marginTop: 1 }}>
-              Bonjour French is a leading platform that offers a wide range of French learning resources and speaking challenges.
-            </Typography>
-          </Grid>
-
-          {/* Column 3: Contact Us */}
-          <Grid item xs={12} md={3}>
-            <Typography variant="h6">Contact Us</Typography>
-            <List sx={{ padding: 0 }}>
-              <ListItem sx={{ paddingLeft: 0, paddingRight: 0 }}>
-                <Typography variant="body2">Email: support@northeastern.edu</Typography>
-              </ListItem>
-              <ListItem sx={{ paddingLeft: 0, paddingRight: 0 }}>
-                <Typography variant="body2">Phone: (617) 373-2000</Typography>
-              </ListItem>
-              <ListItem sx={{ paddingLeft: 0, paddingRight: 0 }}>
-                <Typography variant="body2">Address: 360 Huntington Ave, Boston, MA 02115</Typography>
-              </ListItem>
-            </List>
-          </Grid>
-
-          {/* Column 4: Follow Us */}
+          {/* Column 2: Follow Us */}
           <Grid item xs={12} md={3}>
             <Typography variant="h6">Follow Us</Typography>
             <List
@@ -93,7 +68,15 @@ const Footer = () => {
         </Grid>
 
         {/* Footer Bottom */}
-        <hr style={{ margin: "30px 0", borderColor: "#fff" }} />
+        <hr
+          style={{
+            margin: "30px 0",
+            borderColor: "#fff",
+            width: "100%", // Increase this value to make the line longer
+            marginLeft: "auto",
+            marginRight: "auto", // Center the line
+          }}
+        />
         <Grid container justifyContent="center" alignItems="center">
           <Grid item xs={12} md={6} sx={{ textAlign: "center" }}>
             <Typography variant="body2">© 2024 Bonjour French. All rights reserved.</Typography>

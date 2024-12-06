@@ -22,6 +22,18 @@ const SubscriptionPlans = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // Check if the user is logged in
+    const storedUser = localStorage.getItem("user");
+
+    if (!storedUser) {
+      navigate("/login"); // If not logged in, redirect to login
+    } else {
+      const { role } = JSON.parse(storedUser);
+      if (role !== "employee") {
+        navigate("/admin-dashboard"); // If the role is not employee, redirect to admin dashboard
+      }
+    }
+
     const fetchPlans = async () => {
       try {
         const response = await fetch("http://127.0.0.1:5001/api/v1/plans");
@@ -35,7 +47,7 @@ const SubscriptionPlans = () => {
     };
 
     fetchPlans();
-  }, []);
+  }, [navigate]);
 
   if (loading) {
     return (
@@ -66,13 +78,13 @@ const SubscriptionPlans = () => {
       }}
     >
       <Navbar />
-      <Container maxWidth="lg" sx={{ mt: 4 }}>
+      <Container maxWidth="lg" sx={{ mt: 4, padding:2}}>
         {/* Header Section */}
         <Typography
           variant="h3"
           gutterBottom
           textAlign="center"
-          sx={{ color: "#333", fontWeight: "bold" }}
+          sx={{ color: "#1976d2", fontWeight: "bold" }}
         >
           Subscription Plans for Learning French
         </Typography>
