@@ -3,8 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { TextField, Button, Typography, Box, Paper, Grid, Divider, MenuItem, Select, InputLabel, FormControl } from "@mui/material";
 import Footer from "../components/Footer/Footer";
 
-require('dotenv').config();
-const base_url = process.env.base_url;
+const base_url = process.env.REACT_APP_BASE_URL;
 
 const SignUpPage = () => {
   const navigate = useNavigate();

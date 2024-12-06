@@ -3,9 +3,8 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar/Navbar";
 import Footer from "../components/Footer/Footer";
 import { Container, Typography, Grid, Paper, Box, Button } from "@mui/material";
-require('dotenv').config();
 
-const base_url = process.env.base_url;
+const base_url = process.env.REACT_APP_BASE_URL;
 
 
 const About = () => {

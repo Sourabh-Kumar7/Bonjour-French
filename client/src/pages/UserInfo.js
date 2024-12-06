@@ -4,8 +4,7 @@ import { Box, CircularProgress, Typography, Table, TableBody, TableCell, TableCo
 import AdminNavbar from "../components/Navbar/AdminNavbar";
 import Footer from "../components/Footer/Footer";
 
-require('dotenv').config();
-const base_url = process.env.base_url;
+const base_url = process.env.REACT_APP_BASE_URL;
 
 const UserInfo = () => {
   const navigate = useNavigate();

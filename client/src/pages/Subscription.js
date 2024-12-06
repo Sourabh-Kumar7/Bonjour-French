@@ -5,8 +5,7 @@ import Navbar from "../components/Navbar/Navbar";
 import Footer from "../components/Footer/Footer";
 import { Container, Grid, Typography, CircularProgress, Box } from "@mui/material";
 
-require('dotenv').config();
-const base_url = process.env.base_url;
+const base_url = process.env.REACT_APP_BASE_URL;
 
 // List of features included in all plans
 const allPlanFeatures = [

@@ -6,8 +6,7 @@ import { useDispatch } from "react-redux";
 import { loginSuccess } from "../redux/authSlice";
 import Footer from "../components/Footer/Footer";
 
-require('dotenv').config();
-const base_url = process.env.base_url;
+const base_url = process.env.REACT_APP_BASE_URL;
 
 const LoginPage = () => {
   const navigate = useNavigate();
