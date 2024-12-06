@@ -51,7 +51,7 @@ exports.addSubscription = async ({ userId, planId, startDate }) => {
   // Calculate end date based on plan duration
   const startDateObj = new Date(startDate);
   const endDateObj = new Date(startDateObj);
-  endDateObj.setMonth(endDateObj.getMonth() + plan.duration);
+  endDateObj.setDate(endDateObj.getDate() + plan.duration);
 
   // Save the subscription
   const subscription = new UserSubscription({

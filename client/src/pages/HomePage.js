@@ -1,23 +1,31 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Typography, Button, Container, Grid, Paper } from "@mui/material";
+import { Typography, Button, Container, Grid, Paper, Box } from "@mui/material";
 import Navbar from "../components/Navbar/Navbar";
 import Footer from "../components/Footer/Footer";
 import { useSelector } from "react-redux";
 
 const HomePage = () => {
-  const navigate = useNavigate();  
-  const user = useSelector((state) => state.auth.user);
-  const role = useSelector((state) => state.auth.role);
+  const navigate = useNavigate();
+  const [user, setUser] = useState(null); // State to hold the parsed user object
 
   useEffect(() => {
-    if (!user) {
-      navigate("/login");
-    } else if (role !== "employee") {
-      navigate("/admin-dashboard");
-    }
-  }, [user, role, navigate]);
+    const storedUser = localStorage.getItem("user");
+    
+    if (storedUser) {
+      const parsedUser = JSON.parse(storedUser); // Parse the user object
+      setUser(parsedUser); // Set the parsed user in state
 
+      const { role } = parsedUser;
+      if (role === "admin") {
+        navigate("/admin-dashboard");
+      } else if (role === "employee") {
+        navigate("/home");
+      }
+    } else {
+      navigate("/login");
+    }
+  }, [navigate]);
 
   return (
     <>
@@ -25,17 +33,21 @@ const HomePage = () => {
       <Navbar />
 
       {/* Content */}
-      <Container maxWidth="lg" sx={{ mt: 4 }}>
+      <Container maxWidth="lg" sx={{ mt: 4, padding: 2}}>
         <Grid container spacing={4}>
           {/* Welcome Section */}
           <Grid item xs={12}>
             <Paper elevation={3} sx={{ p: 3, textAlign: "center" }}>
               <Typography variant="h4" gutterBottom>
-                Welcome to the Job Portal!
+                Welcome back, {user?.name}!
               </Typography>
               <Typography variant="body1" color="textSecondary">
-                Explore job opportunities, track your applications, and manage your profile.
+                Explore lessons, track your progress, and master French with ease. 
+                Start your learning journey today!
               </Typography>
+              <Button variant="contained" color="primary" sx={{ mt: 3 }}>
+                Start Learning
+              </Button>
             </Paper>
           </Grid>
 
@@ -43,32 +55,68 @@ const HomePage = () => {
           <Grid item xs={12} sm={6}>
             <Paper elevation={3} sx={{ p: 3, textAlign: "center" }}>
               <Typography variant="h6" gutterBottom>
-                Search for Jobs
+                Explore Lessons
               </Typography>
               <Typography variant="body2" color="textSecondary" sx={{ mb: 2 }}>
-                Browse available job listings and apply directly.
+                Discover beginner, intermediate, and advanced lessons to sharpen your skills.
               </Typography>
               <Button variant="contained" color="primary">
-                Search Jobs
+                Start a Lesson
               </Button>
             </Paper>
           </Grid>
           <Grid item xs={12} sm={6}>
             <Paper elevation={3} sx={{ p: 3, textAlign: "center" }}>
               <Typography variant="h6" gutterBottom>
-                View Applications
+                Track Your Progress
               </Typography>
               <Typography variant="body2" color="textSecondary" sx={{ mb: 2 }}>
-                Track your job applications and their statuses.
+                Monitor your progress and celebrate each milestone.
               </Typography>
               <Button variant="contained" color="primary">
-                My Applications
+                View Progress
+              </Button>
+            </Paper>
+          </Grid>
+
+          {/* Additional Features */}
+          <Grid item xs={12} sm={6}>
+            <Paper elevation={3} sx={{ p: 3, textAlign: "center" }}>
+              <Typography variant="h6" gutterBottom>
+                Complete a Challenge
+              </Typography>
+              <Typography variant="body2" color="textSecondary" sx={{ mb: 2 }}>
+              Boost your vocabulary and fluency with daily challenges.
+              </Typography>
+              <Button variant="contained" color="primary">
+                Take Challenge
+              </Button>
+            </Paper>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Paper elevation={3} sx={{ p: 3, textAlign: "center" }}>
+              <Typography variant="h6" gutterBottom>
+                Join the Community
+              </Typography>
+              <Typography variant="body2" color="textSecondary" sx={{ mb: 2 }}>
+                Engage with fellow learners and discuss lessons, tips, and more.
+              </Typography>
+              <Button 
+                variant="contained" 
+                color="primary" 
+                component="a" 
+                href="https://discord.gg/2kqYJFSC2j" 
+                target="_blank" // Opens the link in a new tab
+                rel="noopener noreferrer" // For security reasons
+              >
+                Join Now
               </Button>
             </Paper>
           </Grid>
         </Grid>
       </Container>
 
+      {/* Footer */}
       <Footer />
     </>
   );

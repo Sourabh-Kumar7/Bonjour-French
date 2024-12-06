@@ -1,57 +1,52 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { TextField, Button, Typography, Box, Paper, Grid, Divider } from "@mui/material";
-import axios from "axios";
-import { useDispatch } from "react-redux";
-import { loginSuccess } from "../redux/authSlice";
+import { TextField, Button, Typography, Box, Paper, Grid, Divider, MenuItem, Select, InputLabel, FormControl } from "@mui/material";
 import Footer from "../components/Footer/Footer";
 
-const LoginPage = () => {
+const SignUpPage = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const [credentials, setCredentials] = useState({ username: "", password: "" });
+  const [formData, setFormData] = useState({ name: "", email: "", password: "", type: "employee" }); // Default to "employee"
   const [error, setError] = useState("");
 
+  // Check if a user is already logged in
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
       const { role } = JSON.parse(storedUser);
       if (role === "admin") {
-        navigate("/admin-dashboard");
+        navigate("/admin-dashboard");  // Redirect to admin dashboard
       } else if (role === "employee") {
-        navigate("/home");
+        navigate("/home");  // Redirect to employee home page
       }
     }
   }, [navigate]);
 
   const handleInputChange = (e) => {
-    setCredentials({ ...credentials, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
 
-  const handleLogin = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5001/api/v1/auth/login", credentials);
+      const response = await fetch("http://localhost:5001/api/v1/user/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
-      if (response.data.message === "Login successful") {
-        const { name, email, type } = response.data.user;
-        const role = type;
-
-        dispatch(loginSuccess({ user: { name, email }, role }));
-
-        localStorage.setItem("user", JSON.stringify({ name, email, role }));
-
-        if (role === "admin") {
-          navigate("/admin-dashboard");
-        } else if (role === "employee") {
-          navigate("/home");
-        }
+      if (response.ok) {
+        alert("Signup successful! Redirecting to login.");
+        navigate("/login"); // Redirect to login page
       } else {
-        setError("Invalid username or password");
+        const data = await response.json();
+        setError(data.message || "Signup failed. Please try again.");
       }
     } catch (err) {
-      const errorMessage = err.response?.data?.error || "Something went wrong. Please try again.";
-      setError(errorMessage);
+      setError("An error occurred. Please try again later.");
+      console.error(err);
     }
   };
 
@@ -64,15 +59,15 @@ const LoginPage = () => {
         sm={4}
         md={7}
         sx={{
-          backgroundImage: 'url(/bf.jpg)', // Replace with your image path
+          backgroundImage: "url(/bf.jpg)", // Replace with your image path
           backgroundRepeat: "no-repeat",
-          backgroundSize: "cover", // Ensures the image covers the full space
+          backgroundSize: "cover",
           backgroundPosition: "center",
           height: "100%", // Ensure it takes the full height of the container
         }}
       />
 
-      {/* Login Section */}
+      {/* Signup Section */}
       <Grid
         item
         xs={12}
@@ -119,7 +114,7 @@ const LoginPage = () => {
               fontSize: { xs: "2rem", sm: "3rem" }, // Responsive typography size
             }}
           >
-            Welcome Back!
+            Create Your Account
           </Typography>
 
           <Typography
@@ -131,12 +126,12 @@ const LoginPage = () => {
               fontSize: { xs: "0.875rem", sm: "1rem" }, // Responsive font size
             }}
           >
-            Please login to continue to the Bonjour French
+            Sign up to access exclusive features of Bonjour French.
           </Typography>
 
           <Box
             component="form"
-            onSubmit={handleLogin}
+            onSubmit={handleSubmit}
             sx={{
               mt: 1,
               width: "100%",
@@ -151,31 +146,57 @@ const LoginPage = () => {
               margin="normal"
               required
               fullWidth
-              id="username"
-              label="Email"
-              name="username"
-              autoComplete="email"
-              autoFocus
-              value={credentials.username}
+              id="name"
+              label="Full Name"
+              name="name"
+              value={formData.name}
               onChange={handleInputChange}
-              sx={{ borderRadius: "8px" }}
+              sx={{ mb: 2, borderRadius: "8px" }}
             />
             <TextField
               margin="normal"
               required
               fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              value={credentials.password}
+              id="email"
+              label="Email"
+              name="email"
+              type="email"
+              value={formData.email}
               onChange={handleInputChange}
-              sx={{ borderRadius: "8px" }}
+              sx={{ mb: 2, borderRadius: "8px" }}
             />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="password"
+              label="Password"
+              name="password"
+              type="password"
+              value={formData.password}
+              onChange={handleInputChange}
+              sx={{ mb: 2, borderRadius: "8px" }}
+            />
+            
+            {/* Role Selection (with default set to "employee") */}
+            <FormControl fullWidth margin="normal">
+              <InputLabel id="role-label">Role</InputLabel>
+              <Select
+                labelId="role-label"
+                id="type"
+                name="type"
+                value={formData.type}
+                onChange={handleInputChange}
+                label="Role"
+                sx={{ mb: 2, borderRadius: "8px" }}
+              >
+                <MenuItem value="employee">Employee</MenuItem>
+                <MenuItem value="admin">Admin</MenuItem>
+              </Select>
+            </FormControl>
 
             {error && (
-              <Typography color="error" variant="body2" sx={{ mt: 1 }}>
+              <Typography color="error" variant="body2" sx={{ mb: 2 }}>
                 {error}
               </Typography>
             )}
@@ -185,18 +206,16 @@ const LoginPage = () => {
               fullWidth
               variant="contained"
               sx={{
-                mt: 3,
-                mb: 2,
+                py: 1.5,
                 textTransform: "none",
                 fontWeight: "bold",
-                padding: "0.8rem",
                 background: "linear-gradient(90deg, #4c5cfa, #1c7dfa)",
                 ":hover": {
                   background: "linear-gradient(90deg, #1c7dfa, #4c5cfa)",
                 },
               }}
             >
-              Login
+              Sign Up
             </Button>
 
             <Divider
@@ -211,22 +230,22 @@ const LoginPage = () => {
 
             <Typography
               variant="body2"
-              align="center"
               sx={{
                 mt: 2,
                 color: "#555",
+                textAlign: "center",
               }}
             >
-              Don’t have an account?{" "}
+              Already have an account?{" "}
               <a
-                href="/sign-up"
+                href="/login"
                 style={{
                   color: "#1976d2",
                   textDecoration: "none",
                   fontWeight: "bold",
                 }}
               >
-                Create new account
+                Log In
               </a>
             </Typography>
           </Box>
@@ -241,4 +260,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default SignUpPage;
