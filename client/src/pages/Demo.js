@@ -21,20 +21,18 @@ const EnglishToFrenchTranslator = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Check if the user is logged in
     const storedUser = localStorage.getItem("user");
 
     if (!storedUser) {
-      navigate("/login"); // If not logged in, redirect to login
+      navigate("/login"); 
     } else {
       const { role } = JSON.parse(storedUser);
       if (role !== "employee") {
-        navigate("/admin-dashboard"); // If the role is not employee, redirect to admin dashboard
+        navigate("/admin-dashboard"); 
       }
     }
   }, [navigate]);
 
-  // Function to validate and translate the input
   const handleTranslate = async () => {
     setError("");
     setFrenchText("");
@@ -57,7 +55,6 @@ const EnglishToFrenchTranslator = () => {
     }
   };
 
-  // Function to copy the French text
   const handleCopy = () => {
     navigator.clipboard.writeText(frenchText);
     alert("French translation copied to clipboard!");
@@ -101,7 +98,16 @@ const EnglishToFrenchTranslator = () => {
       {/* Main Content */}
       <Box
         sx={{
-          background: "white",
+          // background: "white",
+          // minHeight: "100vh",
+          // display: "flex",
+          // alignItems: "center",
+          // justifyContent: "center",
+          // padding: 2,
+          backgroundImage: `url('/mags.jpg')`, 
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
           minHeight: "100vh",
           display: "flex",
           alignItems: "center",
@@ -112,18 +118,22 @@ const EnglishToFrenchTranslator = () => {
         <Container
           maxWidth="md"
           sx={{
-            background: "#ffffff",
+            // background: "#ffffff",
+            // borderRadius: 4,
+            // boxShadow: "0px 8px 20px rgba(0, 0, 0, 0.2)",
+            // padding: 4,
+            background: "rgba(255, 255, 255, 0.9)",
             borderRadius: 4,
             boxShadow: "0px 8px 20px rgba(0, 0, 0, 0.2)",
             padding: 4,
           }}
         >
           <Typography
-            variant="h3"
+            variant="h4"
             align="center"
             sx={{
               fontWeight: 700,
-              color: "#2575fc",
+              color: "#000000",
               mb: 4,
               textTransform: "uppercase",
               letterSpacing: 2,
@@ -264,6 +274,8 @@ const EnglishToFrenchTranslator = () => {
                   </Box>
                 </Paper>
               </Grid>
+
+              
             )}
           </Grid>
         </Container>
@@ -276,3 +288,4 @@ const EnglishToFrenchTranslator = () => {
 };
 
 export default EnglishToFrenchTranslator;
+
