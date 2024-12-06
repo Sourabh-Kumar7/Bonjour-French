@@ -1,37 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { Box, CircularProgress, Typography, Grid, Card, CardContent, Button, Paper, Divider } from "@mui/material";
+import { Box, Typography, Grid, Card, CardContent, Button, Divider } from "@mui/material";
 import AdminNavbar from "../components/Navbar/AdminNavbar";
 import Footer from "../components/Footer/Footer";
-import { loginSuccess } from "../redux/authSlice";
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-
-  const user = useSelector((state) => state.auth.user);
-  const role = useSelector((state) => state.auth.role);
-
   const [error, setError] = useState(null);
 
-  // Effect for checking login state
   useEffect(() => {
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-      const parsedUser = JSON.parse(storedUser);
-      dispatch(loginSuccess({ user: { name: parsedUser.name, email: parsedUser.email }, role: parsedUser.role }));
-    }
-  }, [dispatch]);
+    const storedUser = localStorage.getItem("user");
 
-  useEffect(() => {
-    if (!user) {
-      navigate("/login");
-    } else if (role !== "admin") {
-      navigate("/home");
+    if (!storedUser) {
+      navigate("/login"); // If not logged in, redirect to login
+    } else {
+      const { role } = JSON.parse(storedUser);
+      if (role !== "admin") {
+        navigate("/home"); // If the role is not admin, redirect to home
+      }
     }
-  }, [user, role, navigate]);
-
+  }, [navigate]);
 
   if (error) {
     return (

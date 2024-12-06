@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Button, TextField, Typography, Card, CardContent, Grid, CircularProgress, Snackbar, Alert, Divider } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import AdminNavbar from "../components/Navbar/AdminNavbar";
@@ -17,6 +17,19 @@ const CreateSubscriptionPlan = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarType, setSnackbarType] = useState("success");
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+
+    if (!storedUser) {
+      navigate("/login"); // If not logged in, redirect to login
+    } else {
+      const { role } = JSON.parse(storedUser);
+      if (role !== "admin") {
+        navigate("/home"); // If the role is not admin, redirect to home
+      }
+    }
+  }, [navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

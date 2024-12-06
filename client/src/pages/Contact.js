@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar/Navbar";
 import Footer from "../components/Footer/Footer";
 import { Container, Typography, TextField, Button, Grid, Paper, Box } from "@mui/material";
-import { useSelector } from "react-redux";
 
 const Contact = () => {
   const navigate = useNavigate();
-  const [user, setUser] = useState(null); // State to hold the parsed user object
 
   useEffect(() => {
     // Check if the user is logged in

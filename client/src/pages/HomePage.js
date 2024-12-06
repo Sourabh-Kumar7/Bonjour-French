@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Typography, Button, Container, Grid, Paper, Box } from "@mui/material";
+import { Typography, Button, Container, Grid, Paper } from "@mui/material";
 import Navbar from "../components/Navbar/Navbar";
 import Footer from "../components/Footer/Footer";
-import { useSelector } from "react-redux";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -11,21 +10,36 @@ const HomePage = () => {
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
-    
-    if (storedUser) {
-      const parsedUser = JSON.parse(storedUser); // Parse the user object
-      setUser(parsedUser); // Set the parsed user in state
 
-      const { role } = parsedUser;
-      if (role === "admin") {
-        navigate("/admin-dashboard");
-      } else if (role === "employee") {
-        navigate("/home");
-      }
+    if (!storedUser) {
+      navigate("/login"); // If not logged in, redirect to login
     } else {
-      navigate("/login");
+      const { role } = JSON.parse(storedUser);
+      const parsedUser = JSON.parse(storedUser);
+      setUser(parsedUser);
+      if (role !== "employee") {
+        navigate("/admin-dashboard"); // If the role is not admin, redirect to home
+      }
     }
   }, [navigate]);
+
+  // useEffect(() => {
+  //   const storedUser = localStorage.getItem("user");
+    
+  //   if (storedUser) {
+  //     const parsedUser = JSON.parse(storedUser); // Parse the user object
+  //     setUser(parsedUser); // Set the parsed user in state
+
+  //     const { role } = parsedUser;
+  //     if (role === "admin") {
+  //       navigate("/admin-dashboard");
+  //     } else if (role === "employee") {
+  //       navigate("/home");
+  //     }
+  //   } else {
+  //     navigate("/login");
+  //   }
+  // }, [navigate]);
 
   return (
     <>
