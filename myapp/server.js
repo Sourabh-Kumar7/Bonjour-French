@@ -8,6 +8,8 @@ const userRoutes = require('./routes/userRoutes');
 const loginRoutes = require('./routes/loginRoutes');
 const companyRoutes = require('./routes/companyRoutes');
 const jobRoutes = require('./routes/jobRoutes');
+const subscriptionPlanRoutes = require('./routes/subscriptionPlanRoutes');
+const userSubscriptionRoutes = require('./routes/userSubscriptionRoutes');
 
 
 const port = process.env.PORT;
@@ -42,6 +44,8 @@ app.use('/api/v1/user', userRoutes);
 app.use('/api/v1/auth', loginRoutes);
 app.use('/api/v1/company', companyRoutes);
 app.use('/api/v1/jobs', jobRoutes);
+app.use('/api/v1/plans', subscriptionPlanRoutes);
+app.use('/api/v1/subscriptions', userSubscriptionRoutes);
 
 
 app.use(errorHandler);
