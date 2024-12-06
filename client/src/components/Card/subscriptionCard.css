@@ -1,0 +1,107 @@
+/* Card Styling */
+.subscription-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #f9fbff, #e3f2fd);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    max-width: 350px;
+    margin: 20px auto;
+    text-align: center;
+    border: none;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  
+  .subscription-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Title and Price Styling */
+  .plan-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .plan-price {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1c7dfa;
+    margin-bottom: 15px;
+  }
+  
+  /* Features List */
+  .plan-features-header {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #555;
+    margin-bottom: 10px;
+  }
+  
+  .plan-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 15px 0;
+  }
+  
+  .plan-features li {
+    font-size: 0.9rem;
+    color: #555;
+    line-height: 1.6;
+  }
+  
+  /* Updated Date */
+  .updated-at {
+    font-size: 0.8rem;
+    color: #888;
+    margin-bottom: 20px;
+  }
+  
+  /* Button Styling */
+  .subscribe-button {
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 25px;
+    background: linear-gradient(90deg, #4c5cfa, #1c7dfa);
+    color: white;
+    text-transform: none;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .subscribe-button:hover {
+    background: linear-gradient(90deg, #1c7dfa, #4c5cfa);
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 600px) {
+    .subscription-card {
+      max-width: 100%;
+      padding: 20px;
+    }
+  
+    .plan-title {
+      font-size: 1.25rem;
+    }
+  
+    .plan-price {
+      font-size: 1.1rem;
+    }
+  
+    .plan-features li {
+      font-size: 0.85rem;
+    }
+  
+    .subscribe-button {
+      font-size: 0.9rem;
+      padding: 8px 16px;
+    }
+  }
+  
