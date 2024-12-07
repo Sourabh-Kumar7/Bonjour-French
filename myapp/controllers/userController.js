@@ -2,6 +2,8 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs')
 const asyncHandler = require('express-async-handler')
 const User = require('../models/userModel')
+const { findUserIdByEmail } = require('../services/userService');
+
 require('dotenv').config();
 
 const multer = require('multer');
@@ -28,6 +30,32 @@ const fileFilter = (req, file, cb) => {
     } else {
       cb(new Error('Only JPEG, PNG, and GIF file formats are allowed'));
     }
+};
+
+
+/**
+ * Controller to handle the getId endpoint.
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ */
+const getUserId = async (req, res) => {
+  const { email } = req.body;
+
+  if (!email) {
+      return res.status(400).json({ message: "Email is required" });
+  }
+
+  try {
+      const userId = await findUserIdByEmail(email);
+
+      if (userId) {
+          return res.status(200).json({ userId });
+      } else {
+          return res.status(404).json({ message: "User not found" });
+      }
+  } catch (error) {
+      return res.status(500).json({ message: "Internal server error", error: error.message });
+  }
 };
 
 // Initialize multer with the storage and file filter
@@ -239,6 +267,7 @@ const generateToken = (id) => {
 
 
 module.exports = {
+    getUserId,
     registerUser,
     updateUserDetails,
     getAllUsers,
