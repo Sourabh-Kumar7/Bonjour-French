@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { TextField, Button, Typography, Box, Paper, Grid, Divider, MenuItem, Select, InputLabel, FormControl } from "@mui/material";
 import Footer from "../components/Footer/Footer";
 
+const base_url = process.env.REACT_APP_BASE_URL;
+
 const SignUpPage = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({ name: "", email: "", password: "", type: "employee" }); // Default to "employee"
@@ -29,7 +31,7 @@ const SignUpPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:5001/api/v1/user/create", {
+      const response = await fetch(`${base_url}/api/v1/user/create`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

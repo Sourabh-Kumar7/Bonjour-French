@@ -5,8 +5,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "concurrently \"npm run start-client\" \"npm run start-server\"",
-    "start-client": "cd client && npm start", 
-    "start-server": "node myapp/server.js", 
+    "start-client": "cd client && npm start",
+    "start-server": "node myapp/server.js",
     "server": "nodemon myapp/server.js"
   },
   "author": "Sourabh Kumar",
@@ -17,12 +17,15 @@
     "bcryptjs": "^2.4.3",
     "colors": "^1.4.0",
     "cors": "^2.8.5",
+    "crypto-browserify": "^3.12.1",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
     "express-async-handler": "^1.2.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.8.1",
-    "multer": "^1.4.5-lts.1"
+    "multer": "^1.4.5-lts.1",
+    "os-browserify": "^0.3.0",
+    "path-browserify": "^1.0.1"
   },
   "devDependencies": {
     "concurrently": "^9.1.0",

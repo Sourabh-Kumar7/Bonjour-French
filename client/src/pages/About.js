@@ -4,6 +4,9 @@ import Navbar from "../components/Navbar/Navbar";
 import Footer from "../components/Footer/Footer";
 import { Container, Typography, Grid, Paper, Box, Button } from "@mui/material";
 
+const base_url = process.env.REACT_APP_BASE_URL;
+
+
 const About = () => {
   const navigate = useNavigate();
 

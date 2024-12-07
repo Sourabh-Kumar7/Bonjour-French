@@ -4,6 +4,10 @@ import { Box, CircularProgress, Typography, Table, TableBody, TableCell, TableCo
 import AdminNavbar from "../components/Navbar/AdminNavbar";
 import Footer from "../components/Footer/Footer";
 
+const base_url = process.env.REACT_APP_BASE_URL;
+
+console.log(base_url)
+
 const UserInfo = () => {
   const navigate = useNavigate();
   const [subscriptions, setSubscriptions] = useState([]);
@@ -25,7 +29,7 @@ const UserInfo = () => {
 
     const fetchUserInfo = async () => {
       try {
-        const response = await fetch("http://127.0.0.1:5001/api/v1/subscriptions");
+        const response = await fetch(`${base_url}/api/v1/subscriptions`);
         const data = await response.json();
         setSubscriptions(data); // Set the subscription data
         setLoading(false); // Stop loading
