@@ -54,6 +54,9 @@ const SubscriptionCard = ({ planName, price, duration, features, updatedAt, user
         <Typography variant="h6" component="p" className="plan-price">
           ${formattedPrice} / {duration}
         </Typography>
+        <Typography variant="subtitle1" component="p" className="plan-features-header">
+          Features:
+        </Typography>
         <ul className="plan-features-list">
           {features.map((feature, index) => (
             <li key={index} className="plan-feature-item">
