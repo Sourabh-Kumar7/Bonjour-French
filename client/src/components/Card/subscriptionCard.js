@@ -52,7 +52,7 @@ const SubscriptionCard = ({ planName, price, duration, features, updatedAt, user
           {planName}
         </Typography>
         <Typography variant="h6" component="p" className="plan-price">
-          ${formattedPrice} / {duration}
+          ${formattedPrice} / {duration} {duration > 1 ? "days" : "day"}
         </Typography>
         <Typography variant="subtitle1" component="p" className="plan-features-header">
           Features:
