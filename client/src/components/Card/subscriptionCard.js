@@ -23,7 +23,7 @@ const SubscriptionCard = ({ planName, price, duration, features, updatedAt, user
         const result = await response.json();
         setSnackbar({
           open: true,
-          message: `Subscription successful: ${result.message}`,
+          message: `Subscription successful`,
           severity: "success",
         });
       } else {
