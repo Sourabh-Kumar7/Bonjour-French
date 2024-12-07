@@ -23,7 +23,9 @@ const app = express();
 
 const cors = require("cors");
 
-app.use(cors({ origin: `${ui_base_url}` }));
+// app.use(cors({ origin: `${ui_base_url}` }));
+app.use(cors());
+
 
 
 // Middleware
