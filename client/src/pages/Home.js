@@ -46,7 +46,7 @@ const Home = () => {
       image: "/image3.jpg",
     },
     {
-      image: "/image16.png",
+      image: "/image16.jpg",
     },
   ];
 
