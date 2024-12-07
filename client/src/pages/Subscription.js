@@ -19,12 +19,13 @@ const allPlanFeatures = [
 
 const SubscriptionPlans = () => {
   const navigate = useNavigate();
+
   const [plans, setPlans] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [userId, setUserId] = useState(null);
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
-
     if (!storedUser) {
       navigate("/login");
     } else {
@@ -33,6 +34,52 @@ const SubscriptionPlans = () => {
         navigate("/admin-dashboard");
       }
     }
+
+    const getUserIdFromEmail = async (email) => {
+      if (!email) {
+        console.error("Email is required to fetch user ID");
+        return null;
+      }
+    
+      const apiUrl = `${process.env.REACT_APP_BASE_URL}/api/v1/users/getId`;
+    
+      try {
+        const response = await fetch(apiUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email }),
+        });
+    
+        if (response.ok) {
+          const data = await response.json();
+          return data.userId || null;
+        } else if (response.status === 404) {
+          console.error("User does not exist");
+          return null;
+        } else {
+          console.error("Error fetching user ID:", response.statusText);
+          return null;
+        }
+      } catch (error) {
+        console.error("Network or server error:", error.message);
+        return null;
+      }
+    };
+    
+    const userEmail = JSON.parse(localStorage.getItem("user"))?.email || "";
+    let userId = null;
+
+    getUserIdFromEmail(userEmail).then((id) => {
+      if (id) {
+        userId = id;
+        console.log("User ID:", userId);
+      } else {
+        console.log("User does not exist or error occurred.");
+      }
+    });
+    
 
     const fetchPlans = async () => {
       try {
@@ -48,8 +95,6 @@ const SubscriptionPlans = () => {
 
     fetchPlans();
   }, [navigate]);
-
-  const userId = JSON.parse(localStorage.getItem("user"))?.id || ""; // Get current user's ID
 
   if (loading) {
     return (
@@ -73,14 +118,15 @@ const SubscriptionPlans = () => {
   return (
     <Box
       sx={{
-        backgroundColor: "#eaf4fc",
+        backgroundColor: "#eaf4fc", // Light pastel blue background
         minHeight: "100vh",
         display: "flex",
         flexDirection: "column",
       }}
     >
       <Navbar />
-      <Container maxWidth="lg" sx={{ mt: 4, padding: 2 }}>
+      <Container maxWidth="lg" sx={{ mt: 4, padding:2}}>
+        {/* Header Section */}
         <Typography
           variant="h3"
           gutterBottom
@@ -95,8 +141,11 @@ const SubscriptionPlans = () => {
           textAlign="center"
           gutterBottom
         >
-          Choose a plan that suits your goals and start mastering the French language today!
+          Choose a plan that suits your goals and start mastering the French
+          language today!
         </Typography>
+
+        {/* Subscription Plans */}
         <Grid container spacing={4}>
           {plans.map((plan) => (
             <Grid item xs={12} sm={6} md={4} key={plan._id}>
@@ -112,6 +161,57 @@ const SubscriptionPlans = () => {
             </Grid>
           ))}
         </Grid>
+
+        {/* All Plans Include Section */}
+        <Box
+          sx={{
+            mt: 6,
+            p: 4,
+            backgroundColor: "#ffffff", // White background for the section
+            borderRadius: "12px",
+            textAlign: "center",
+            boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.1)",
+          }}
+        >
+          <Typography variant="h5" fontWeight="bold" gutterBottom>
+            All subscription plans include
+          </Typography>
+          <Typography
+            variant="body1"
+            color="textSecondary"
+            gutterBottom
+          >
+            Unlock everything you need to master French, no matter your level of
+            proficiency!
+          </Typography>
+          <Grid container spacing={2} justifyContent="center">
+            {allPlanFeatures.map((feature, index) => (
+              <Grid item xs={12} sm={6} md={4} key={index}>
+                <Typography
+                  variant="body1"
+                  sx={{
+                    fontSize: "1rem",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <span
+                    style={{
+                      display: "inline-block",
+                      width: "8px",
+                      height: "8px",
+                      backgroundColor: "#1976d2",
+                      borderRadius: "50%",
+                      marginRight: "10px",
+                    }}
+                  ></span>
+                  {feature}
+                </Typography>
+              </Grid>
+            ))}
+          </Grid>
+        </Box>
       </Container>
       <Footer />
     </Box>

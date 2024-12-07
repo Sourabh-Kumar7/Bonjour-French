@@ -1,19 +1,16 @@
 const User = require('../models/userModel');
 
-/**
- * Service to find a user's ID by email.
- * @param {string} email - The email of the user.
- * @returns {Promise<string|null>} - The user's ID if found, or null if not found.
- */
-const findUserIdByEmail = async (email) => {
+// Service to get user by email
+const getUserByEmailService = async (email) => {
     try {
-        const user = await User.findOne({ email });
-        return user ? user._id : null;
+      const user = await User.findOne({ email });
+      return user;
     } catch (error) {
-        throw new Error("Error fetching user by email: " + error.message);
+      console.error("Error fetching user by email:", error);
+      throw new Error('Database error');
     }
-};
-
-module.exports = {
-    findUserIdByEmail,
-};
+  };
+  
+  module.exports = {
+    getUserByEmailService,
+  };

@@ -58,11 +58,12 @@ const SubscriptionCard = ({ planName, price, duration, features, updatedAt, user
           Features:
         </Typography>
         <ul className="plan-features-list">
-          {features.map((feature, index) => (
+          {features}
+          {/* {features.map((feature, index) => (
             <li key={index} className="plan-feature-item">
               {feature}
             </li>
-          ))}
+          ))} */}
         </ul>
         <Typography variant="caption" display="block" color="textSecondary" gutterBottom>
           Last Updated: {updatedAt}
