@@ -14,6 +14,6 @@ router.put('/edit/:id', protect, updateUserDetails)
 router.get('/getAll', getAllUsers)
 router.delete('/delete', deleteUser)
 router.post('/uploadImage', protect, uploadImage);
-router.get('/user/:email', getUserByEmail);
+router.get('/:email', getUserByEmail);
 
 module.exports = router
