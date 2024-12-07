@@ -35,50 +35,55 @@ const SubscriptionPlans = () => {
       }
     }
 
-    const getUserIdFromEmail = async (email) => {
-      if (!email) {
-        console.error("Email is required to fetch user ID");
-        return null;
-      }
-    
-      const apiUrl = `${process.env.REACT_APP_BASE_URL}/api/v1/users/getId`;
-    
+    const getUserByEmail = async (email) => {
       try {
+        const apiUrl = `${process.env.REACT_APP_BASE_URL}/api/v1/user/${email}`;
         const response = await fetch(apiUrl, {
-          method: "POST",
+          method: "GET",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ email }),
         });
     
         if (response.ok) {
           const data = await response.json();
-          return data.userId || null;
-        } else if (response.status === 404) {
-          console.error("User does not exist");
-          return null;
+          console.log("User found:", data); // Handle user data
+          return data; // Return user data
         } else {
-          console.error("Error fetching user ID:", response.statusText);
-          return null;
+          if (response.status === 404) {
+            console.log("User not found");
+            return null;
+          } else {
+            console.error("Error fetching user:", response.statusText);
+            return null;
+          }
         }
       } catch (error) {
-        console.error("Network or server error:", error.message);
+        console.error("Network error:", error);
         return null;
       }
     };
+
     
     const userEmail = JSON.parse(localStorage.getItem("user"))?.email || "";
-    let userId = null;
 
-    getUserIdFromEmail(userEmail).then((id) => {
-      if (id) {
-        userId = id;
-        console.log("User ID:", userId);
-      } else {
-        console.log("User does not exist or error occurred.");
+    const fetchUserId = async () => {
+      try {
+        const user = await getUserByEmail(userEmail); 
+        if (user) {
+          setUserId(user._id);
+        } else {
+          setError("User not found");
+        }
+      } catch (err) {
+        setError("Failed to fetch user data");
+        console.error(err);
+      } finally {
+        setLoading(false);
       }
-    });
+    };
+
+    fetchUserId();
     
 
     const fetchPlans = async () => {
