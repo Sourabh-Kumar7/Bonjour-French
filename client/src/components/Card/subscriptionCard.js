@@ -4,7 +4,7 @@ import "./subscriptionCard.css";
 
 const SubscriptionCard = ({ planName, price, duration, features, updatedAt, userId, planId }) => {
   const [snackbar, setSnackbar] = useState({ open: false, message: "", severity: "success" });
-
+  console.log(userId)
   const handleSubscribe = async () => {
     try {
       const response = await fetch(`${process.env.REACT_APP_BASE_URL}/api/v1/subscriptions`, {
