@@ -1,3 +1,22 @@
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import SubscriptionCard from "../components/Card/subscriptionCard";
+import Navbar from "../components/Navbar/Navbar";
+import Footer from "../components/Footer/Footer";
+import { Container, Grid, Typography, CircularProgress, Box } from "@mui/material";
+
+const base_url = process.env.REACT_APP_BASE_URL;
+
+// List of features included in all plans
+const allPlanFeatures = [
+  "Access to 100+ French lessons",
+  "Interactive quizzes and exercises",
+  "Audio pronunciation guides",
+  "Personalized progress tracking",
+  "Grammar-focused modules",
+  "Weekly progress reports",
+];
+
 const SubscriptionPlans = () => {
   const navigate = useNavigate();
   const [plans, setPlans] = useState([]);
