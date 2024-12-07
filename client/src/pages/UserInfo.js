@@ -5,8 +5,7 @@ import AdminNavbar from "../components/Navbar/AdminNavbar";
 import Footer from "../components/Footer/Footer";
 
 const base_url = process.env.REACT_APP_BASE_URL;
-
-console.log(base_url)
+console.log(base_url);
 
 const UserInfo = () => {
   const navigate = useNavigate();

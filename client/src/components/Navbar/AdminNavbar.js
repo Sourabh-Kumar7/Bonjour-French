@@ -91,8 +91,11 @@ const AdminNavbar = () => {
           ) : (
             // Desktop view - show the buttons horizontally
             <Box>
+              <Button color="inherit" component={Link} to="/users">
+                Users
+              </Button>
               <Button color="inherit" component={Link} to="/userinfo">
-                User Info
+                User-Subscriptions
               </Button>
               <Button color="inherit" component={Link} to="/create-plan">
                 Add Subscription Plan

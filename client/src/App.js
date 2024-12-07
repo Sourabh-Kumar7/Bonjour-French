@@ -11,7 +11,7 @@ import EnglishToFrenchTranslator from "./pages/Demo";
 import UserInfo from "./pages/UserInfo";
 import CreateSubscriptionPlan from "./pages/CreatePlan";
 import Home from "./pages/Home";
-
+import UsersPage from "./pages/Users";
 
 
 
@@ -30,6 +30,7 @@ function App() {
         <Route path="/demo" element={<EnglishToFrenchTranslator />} />
         <Route path="/userinfo" element={<UserInfo />} />
         <Route path="/create-plan" element={<CreateSubscriptionPlan />} />
+        <Route path="/users" element={<UsersPage />} />
       </Routes>
     </Router>
   );
